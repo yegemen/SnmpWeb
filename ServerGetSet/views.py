@@ -41,8 +41,8 @@ def snmpget(request):
                 context["result"]["System Name"] = all("1.3.6.1.2.1.1.5.0")
                 context["result"]["System Description"] = all("1.3.6.1.2.1.1.1.0")
                 context["result"]["System UpTime"] = all("1.3.6.1.2.1.1.3.0")
-                context["result"]["System Contact"] = all("sysContact.0")
-                context["result"]["System Location"] = all("sysLocation.0")
+                context["result"]["System Contact"] = all("1.3.6.1.2.1.1.4.0")
+                context["result"]["System Location"] = all("1.3.6.1.2.1.1.6.0")
                 context["result"]["System Date"] = all("1.3.6.1.2.1.25.1.2.0")
                 context["result"]["System Num Users"] = all("1.3.6.1.2.1.25.1.5.0")
                 context["result"]["Total Free Memory"] = all("1.3.6.1.4.1.2021.4.11.0")
@@ -86,10 +86,10 @@ def snmpget(request):
                     context["result"]["System Description"] = SnmpGet("1.3.6.1.2.1.1.1.0")
                 if type == "1.3.6.1.2.1.1.3.0":
                     context["result"]["System UpTime"] = SnmpGet("1.3.6.1.2.1.1.3.0")
-                if type == "sysContact.0":
-                    context["result"]["System Contact"] = SnmpGet("sysContact.0")
-                if type == "sysLocation.0":
-                    context["result"]["System Location"] = SnmpGet("sysLocation.0")
+                if type == "1.3.6.1.2.1.1.4.0":
+                    context["result"]["System Contact"] = SnmpGet("1.3.6.1.2.1.1.4.0")
+                if type == "1.3.6.1.2.1.1.6.0":
+                    context["result"]["System Location"] = SnmpGet("1.3.6.1.2.1.1.6.0")
                 if type == "1.3.6.1.2.1.25.1.2.0":
                     context["result"]["System Date"] = SnmpGet("1.3.6.1.2.1.25.1.2.0")
                 if type == "1.3.6.1.2.1.25.1.5.0":
