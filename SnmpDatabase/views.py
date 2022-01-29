@@ -22,8 +22,8 @@ def deviceadd(request):
             get1 = deviceinfo("1.3.6.1.2.1.1.5.0") # name
             get2 = deviceinfo("1.3.6.1.2.1.1.1.0") # description
             get3 = request.POST['community']
-            get4 = deviceinfo("sysContact.0")
-            get5 = deviceinfo("sysLocation.0")
+            get4 = deviceinfo("1.3.6.1.2.1.1.4.0")
+            get5 = deviceinfo("1.3.6.1.2.1.1.6.0")
 
             context = {
                 "result": {"System Name": f"{get1}", "System Description": f"{get2}", "System Contact": f"{get4}", "System Location": f"{get5}", "Community": f"{get3}"},
@@ -114,8 +114,8 @@ def collectiveget(request):
                     context["result"][f"{ip} - System Name"] = all(ip, "1.3.6.1.2.1.1.5.0")
                     context["result"][f"{ip} - System Description"] = all(ip, "1.3.6.1.2.1.1.1.0")
                     context["result"][f"{ip} - System UpTime"] = all(ip, "1.3.6.1.2.1.1.3.0")
-                    context["result"][f"{ip} - System Contact"] = all(ip, "sysContact.0")
-                    context["result"][f"{ip} - System Location"] = all(ip, "sysLocation.0")
+                    context["result"][f"{ip} - System Contact"] = all(ip, "1.3.6.1.2.1.1.4.0")
+                    context["result"][f"{ip} - System Location"] = all(ip, "1.3.6.1.2.1.1.6.0")
                     context["result"][f"{ip} - System Date"] = all(ip, "1.3.6.1.2.1.25.1.2.0")
                     context["result"][f"{ip} - System Num Users"] = all(ip, "1.3.6.1.2.1.25.1.5.0")
                     context["result"][f"{ip} - Total Free Memory"] = all(ip, "1.3.6.1.4.1.2021.4.11.0")
@@ -161,10 +161,10 @@ def collectiveget(request):
                         context["result"][f"{ip} - System Description"] = SnmpGet(ip, "1.3.6.1.2.1.1.1.0")
                     if type == "1.3.6.1.2.1.1.3.0":
                         context["result"][f"{ip} - System UpTime"] = SnmpGet(ip, "1.3.6.1.2.1.1.3.0")
-                    if type == "sysContact.0":
-                        context["result"][f"{ip} - System Contact"] = SnmpGet(ip, "sysContact.0")
-                    if type == "sysLocation.0":
-                        context["result"][f"{ip} - System Location"] = SnmpGet(ip, "sysLocation.0")
+                    if type == "1.3.6.1.2.1.1.4.0":
+                        context["result"][f"{ip} - System Contact"] = SnmpGet(ip, "1.3.6.1.2.1.1.4.0")
+                    if type == "1.3.6.1.2.1.1.6.0":
+                        context["result"][f"{ip} - System Location"] = SnmpGet(ip, "1.3.6.1.2.1.1.6.0")
                     if type == "1.3.6.1.2.1.25.1.2.0":
                         context["result"][f"{ip} - System Date"] = SnmpGet("1.3.6.1.2.1.25.1.2.0")
                     if type == "1.3.6.1.2.1.25.1.5.0":
