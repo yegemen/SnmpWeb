@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br>
+    <h1> Hata ! </h1>
+{% else %}
+<br><br><br><br>
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="card my-5 w-25" style="background-color:#C0C0C0; border-color:#696969; border-width:10px; color:black;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    Giriş Yapın
+                    <hr />
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    <div class="form-group">
+                        <form action="{% url 'login' %}" method='POST'>
+                            {% csrf_token %}
+                        <label for="name">Kullanıcı Adı:</label>
+			            <input type="text" name="username" class="form-control" placeholder="Kullanıcı Adı girin..">
+                        <br>
+                        <label for="password">Parola:</label>
+			            <input type="password" name="password" class="form-control" placeholder="Parola girin..">
+                        <br>
+                        <input type="submit" class="btn btn-secondary btn-lg btn-block" value="Giriş">
+                        </form>
+                    </div>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <br>
+                            <div class="alert alert-error alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
+                </p>
+
+                </div>
+            </div> 
+        
+        </div>
+
+    </div>
+
+    <br><br>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if saveddevice %}
+    
+            <div class="card my-5 w-100" style="background-color:#C0C0C0; border-color:#696969; border-width:10px; color:black;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    <br><b>Kayıtlı Cihazlar:</b>
+                    <hr color:"#696969"></hr>
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <thead align="center">
+                            <td><b>IP ADRESİ</td>
+                            <td><b>SYSTEM NAME</b></td>
+                            {% comment %} <td><b>SYSTEM DESCRIPTION</b></td> {% endcomment %}
+                            <td><b>SYSTEM CONTACT</b></td>
+                            <td><b>SYSTEM LOCATION</b></td>
+                            <td></td>
+                            </thead>
+                         </tr>
+                         <tbody>
+                         {% for saved in saveddevice %}
+                         <tr>
+                            <td>{{saved.Device_Ip}}</td>
+                            <td>{{saved.System_Name}}</td>
+                            {% comment %} <td>{{saved.System_Description}}</td> {% endcomment %}
+                            <td>{{saved.System_Contact}}</td>
+                            <td>{{saved.System_Location}}</td>
+                            <td align="center"><form action="{% url 'devicesaved' %}" method='POST'>{% csrf_token %}<input type="submit" class="btn btn-secondary" value="SİL"><input type="hidden" name="silinecek" value="{{saved.Device_Ip}}"></form></td>
+                         </tr>
+                         {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                        {% comment %} <p align="left" style="color:black;"><b>IP ADRESİ: </b>{{saved.Device_Ip}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:black;"><b>SYSTEM DESCRIPTION: </b>{{saved.System_Description}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:black;"><b>SYSTEM CONTACT: </b>{{saved.System_Contact}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:black;"><b>SYSTEM NAME: </b>{{saved.System_Name}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:black;"><b>SYSTEM LOCATION: </b>{{saved.System_Location}}</p><hr color:"#696969"></hr>
+                     {% endcomment %}
+                    
+                </p>
+
+                </div>
+            </div>
+    
+    
+            {% else %}
+            <br><br><br><br>
+            <b><p align="left" style="color:black;">Kayıtlı Cihaz Bulunmamaktadır.</p></b>
+            <br><br>
+            <hr color:"#696969">
+    {% endif %}
+{% endblock %}

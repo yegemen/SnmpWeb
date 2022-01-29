@@ -1,0 +1,30 @@
+<header>
+        <div class="navbar navbar-expand-sm navbar-dark" style="background-color:#696969;"> 
+            <div class="container">
+                {% if user.is_authenticated %}
+                <a href="{% url 'select' %}" class="navbar-brand">SNMP Web</a>
+                {% else %}
+                <a href="/" class="navbar-brand">SnmpWeb</a>
+                {% endif %}
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">( {{ user.username }} )  Çıkış Yap</a>
+                            <form action="{% url 'logout' %}" method="POST" id="logout">
+                                    {%csrf_token%}
+                                    <input type="hidden">  
+                             </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'login' %}" class="nav-link">Giriş</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'register' %}" class="nav-link">Kayıt Ol</a>
+                        </li>
+                    {% endif %}
+                    
+                </ul>
+            </div>
+        </div>
+    </header>

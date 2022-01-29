@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br><br><br><br>
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="card my-5 w-25" style="background-color:#C0C0C0; border-color:#696969; border-width:10px; color:black;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    Cihaz Ekle
+                    <hr />
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    <div class="form-group">
+                        <form action="{% url 'deviceadd' %}" method='POST'>
+                            {% csrf_token %}
+                        <label for="name">IP Adresi:</label>
+			            <input type="text" name="ip" class="form-control" placeholder="IP girin..">
+                        <br>
+                        <label for="community">Topluluk Adı:</label>
+			            <input type="text" name="community" class="form-control" placeholder="Topluluk Adı girin..">
+                        <br>
+                        <input type="submit" class="btn btn-secondary btn-lg btn-block" value="Ekle !">
+                        </form>
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <br>
+                            <div class="alert alert-error alert-dismissible fade show" role="alert">
+                                <b>{{ message }}</b>
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
+                </p>
+
+                </div>
+            </div> 
+            <div class="clearfix"></div>
+            <table align="center">
+            {% if result %}
+            <div class="card my-5 w-75" style="background-color:#C0C0C0; border-color:#696969; border-width:10px; color:black;">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <br>Eklemek istediğiniz IP adresine ait cihazın bilgileri aşağıdaki gibidir. Emin misiniz?
+                    <hr color:"#696969"></hr>
+                </h5>
+                <p class="card-text"><b>Hedef IP:</b> {{targetIP}}<br>
+                    <br>
+                    {% for rs in result %}
+                        {{rs}}
+                        <br><br>
+                    {% endfor %}
+                </p>
+                <input type="submit" name="select" class="btn btn-secondary btn-lg btn-block" value="Evet"> <input type="submit" name="select" class="btn btn-secondary btn-lg btn-block" value="Hayır">
+                </div>
+            </div>
+            {% else %}
+            {% endif %}
+            </table>
+        </div>
+
+    </div>
+
+    <br><br>
+    
+{% else %}
+<br>
+<h1> Hata ! </h1>
+{% endif %}
+
+{% endblock %}

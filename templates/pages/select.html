@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br><br><br>
+
+<h2> VERİ TABANI </h2>
+<br>
+
+<a href="{% url 'deviceadd' %}" class="btn btn-secondary btn-lg btn-block" value="device_add">CİHAZ EKLE</a>
+
+<br><br>
+
+<a href="{% url 'devicesaved' %}" class="btn btn-secondary btn-lg btn-block" value="device_saved">KAYITLI CİHAZLAR</a>
+
+<br><br>
+
+<a href="{% url 'collectiveget' %}" class="btn btn-secondary btn-lg btn-block" value="device_saved">SNMP GET</a>
+
+<br><br>
+
+<a href="{% url 'collectiveset' %}" class="btn btn-secondary btn-lg btn-block" value="device_saved">SNMP SET</a>
+
+<br><br><br>
+
+<h2> DİĞER CİHAZLAR </h2>
+<br>
+
+<a href="{% url 'snmpget' %}" class="btn btn-secondary btn-lg btn-block" value="server_snmp_get">SNMP GET</a>
+
+<br><br>
+
+<a href="{% url 'snmpset' %}" class="btn btn-secondary btn-lg btn-block" value="server_snmp_set">SNMP SET</a>
+
+<br><br>
+
+{% else %}
+<br>
+<h1> Hata ! </h1>
+{% endif %}
+
+{% endblock %}

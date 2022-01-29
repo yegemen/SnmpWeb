@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br><br><br><br>
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="card my-5 w-25" style="background-color:#C0C0C0; border-color:#696969; border-width:10px; color:black;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    SNMP Set
+                    <hr />
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    <div class="form-group">
+                        <form action="{% url 'collectiveset' %}" method='POST'>
+                            {% csrf_token %}
+                            {% if saveddevice %}
+                        <label for="name"><b>Kayıtlı Cihazlar (IP - Name):</b></label>
+                        <br><br>
+                        {% for saved in saveddevice %}
+                            <label class="form-check-label">
+                                <input type="checkbox" value="{{saved.Device_Ip}}" name="ip"> {{saved.Device_Ip}} - {{saved.System_Name}}
+                            </label>
+                        {% endfor %}
+                        <br><br>
+                        <label for="newvalue">Yeni Değer:</label>
+                        <input type="text" name="newvalue" class="form-control" placeholder="Yeni Değer girin..">
+                        <br>
+                        <label for="type">Değiştirilecek Değer: </label>
+                        <select name="type" class="form-select form-select-sm">
+                            <option value="sysName.0">System Name</option>
+                            <option value="sysContact.0" selected>System Contact</option>
+                            <option value="sysLocation.0">System Location</option>
+                        </select>       
+                        <br>
+                        <input type="submit" class="btn btn-secondary btn-lg btn-block" value="Değiştir !">
+                        {% else %}
+                        <label for="name"><b>Kayıtlı Cihaz Bulunmamaktadır.</b></label>
+                        {% endif %}
+                        </form>
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <br>
+                            <div class="alert alert-error alert-dismissible fade show" role="alert">
+                                <b>{{ message }}</b>
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
+                </p>
+
+                </div>
+            </div> 
+            <div class="clearfix"></div>
+            <table align="center">
+                {% if targetIP %}
+                <div class="card my-5 w-75" style="background-color:#C0C0C0; border-color:#696969; border-width:10px; color:black;">
+                    <div class="card-body">
+                    <h5 class="card-title">
+                        <br>Sonuç:
+                        <hr color:"#696969"></hr>
+                    </h5>
+                    <p class="card-text"><b>Hedef IP'ler:</b><br>
+                        <br>
+                        {% for ip in targetIP %}
+                        <b>{{ ip }}</b>
+                            <br>
+                        {% endfor %}
+                        <br>
+                        {{success}}
+                    </p>
+                    </div>
+                </div>
+                {% else %}
+                {% endif %}
+            </table>
+        </div>
+
+    </div>
+
+    <br><br>
+    
+{% else %}
+<br>
+<h1> Hata ! </h1>
+{% endif %}
+
+{% endblock %}
