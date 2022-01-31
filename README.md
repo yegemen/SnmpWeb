@@ -12,7 +12,7 @@ It is an application developed to use the SNMP service from the web interface.
 
   `sudo apt install snmp snmpd snmp-mibs-downloader`
 
-  `service snmpd start`
+  `sudo service snmpd start`
 
 - You should replace the /etc/snmp/snmpd.conf file on the target device with the snmpd.conf file I gave you. (SnmpWeb/snmpd.conf) 
 
